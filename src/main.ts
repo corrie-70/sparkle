@@ -1,4 +1,4 @@
-const electron = require('electron');
+const electron = require("electron");
 
 const { app, BrowserWindow } = electron;
 
@@ -8,12 +8,14 @@ function createWindow() {
         height: 600,
         webPreferences: {
             // 允许渲染进程使用node API
-            nodeIntegration: true
-        }
-    })
+            nodeIntegration: true,
+        },
+    });
 
-    win.loadURL('http://localhost:3000/')
+    win.loadURL("http://localhost:3000/");
     win.webContents.openDevTools();
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
+
+export {};

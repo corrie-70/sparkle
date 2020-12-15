@@ -3,7 +3,7 @@ import React from 'react';
 
 const Home = () => {
     return <div>Home
-        <Button onClick={() => { message.warn('点击了信息') }}>点击</Button>
+        <Button onClick={async () => { message.warn('点击了信息') }}>点击</Button>
     </div>;
 };
 
