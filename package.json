@@ -2,7 +2,7 @@
   "name": "sparkle",
   "version": "0.1.0",
   "private": true,
-  "main": "/build/main/main.js",
+  "main": "./build/main.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -32,7 +32,8 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "electron-dev": "electron .",
-    "electron-win64": "electron-builder --win --x64"
+    "electron-win64": "electron-builder --win --x64",
+    "start-main": "node --trace-warnings ./node_modules/webpack/bin/webpack --config ./config/webpack.config.electron.js"
   },
   "eslintConfig": {
     "extends": [
@@ -56,7 +57,9 @@
     "@types/react-redux": "^7.1.12",
     "@types/react-router-dom": "^5.1.6",
     "electron": "^11.1.0",
-    "electron-builder": "^22.9.1"
+    "electron-builder": "^22.9.1",
+    "ts-loader": "^8.0.12",
+    "webpack-cli": "^4.2.0"
   },
   "author": {
     "name": "corrie",
@@ -67,7 +70,8 @@
     "productName": "sparkle",
     "appId": "com.corrir.sparkle",
     "directories": {
-      "output": "app"
+      "app": "app",
+      "output": "pack"
     },
     "files": [
       "build/**/*"
