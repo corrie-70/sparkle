@@ -3,9 +3,10 @@ const fs = require('fs');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const _resolve = (relativePath) => path.resolve(appDirectory, relativePath);
+const mode = process.env.NODE_ENV ? 'development' : 'production';
 
 module.exports = {
-    mode: 'development',
+    mode,
     entry: './src/main/main',
     output: {
         path: _resolve('build'),
