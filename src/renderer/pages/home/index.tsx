@@ -2,7 +2,7 @@ import { Button, message, Row } from "antd";
 import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import * as actions from "../stores/actions";
+import * as actions from "../../stores/actions";
 
 interface IStateProps {
     count: number;

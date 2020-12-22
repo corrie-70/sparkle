@@ -6,11 +6,13 @@ function createWindow() {
     let win = new BrowserWindow({
         width: 800,
         height: 600,
+        center: true,
+        backgroundColor: '#fff',
         webPreferences: {
             // 允许渲染进程使用node API
             nodeIntegration: true,
         },
-        frame: false,
+        // frame: false,
     });
 
     win.loadURL("http://localhost:3000/");
