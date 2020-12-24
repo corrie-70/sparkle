@@ -31,9 +31,9 @@ type ReduxType = ReturnType<typeof mapStateToProps> &
 const MainLogoCom = (props: ReduxType) => {
     const { collapsed, changeCollapsedAction } = props;
     return (
-        <Row className="sider-logo-row">
+        <Row className={collapsed ? "sider-logo-row" : "sider-logo-row logo-row-collapsed"}>
             {!collapsed && <Col className="logo-row-title">Sparkle</Col>}
-            <Col className={"logo-row-btn"}>
+            <Col className="logo-row-btn">
                 <Button
                     type="primary"
                     onClick={changeCollapsedAction}
