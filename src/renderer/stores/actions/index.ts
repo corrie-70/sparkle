@@ -1,5 +1,9 @@
-import { increase } from "../constants";
+import { changeCollapsed, increase } from "../constants";
 
-export const increaseAction  = () => ({
+export const increaseAction = () => ({
     type: increase,
+});
+
+export const changeCollapsedAction = () => ({
+    type: changeCollapsed,
 });

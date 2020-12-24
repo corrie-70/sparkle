@@ -1,58 +1,47 @@
 import React from "react";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { Home } from "./home";
 import { About } from "./about";
-import { Col, Layout, Menu, Row } from "antd";
-import {
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    UnorderedListOutlined,
-    CustomerServiceOutlined,
-    IdcardOutlined,
-} from "@ant-design/icons";
+import { Layout } from "antd";
 
 import "./layout.less";
 import { Feedback } from "./feedback";
+import { MainLogo } from "../components/main-logo";
+import { MainMenu } from "../components/main-menu";
+import { connect } from "react-redux";
 
 const { Sider, Header, Content } = Layout;
-const { SubMenu } = Menu;
 
-const App = () => {
+interface IStateProps {
+    collapsed: boolean;
+}
+
+// 将 reducer 中的状态插入到组件的 props 中
+const mapStateToProps = (state): IStateProps => {
+    return {
+        collapsed: state.mainMenuCollapsed.collapsed,
+    };
+};
+
+const MainLayoutCom = (props: IStateProps) => {
+    const { collapsed } = props;
     return (
         <Router>
             <Layout className="sparkle-layout">
-                <Sider>
-                    <Row className="sider-logo-row">
-                        <Col span={18} className="logo-row-title">
-                            Sparkle
-                        </Col>
-                        <Col span={4} offset={2} className="logo-row-btn">
-                            <MenuUnfoldOutlined />
-                        </Col>
-                    </Row>
-                    <Row className="sider-menu-row">
-                        <Menu
-                            mode="inline"
-                            theme="dark"
-                            className="sider-menu-main"
-                        >
-                            <Menu.Item icon={<UnorderedListOutlined />}>
-                                <NavLink to="/">提醒事项</NavLink>
-                            </Menu.Item>
-                            <Menu.Item icon={<CustomerServiceOutlined />}>
-                                <NavLink to="/feedback">反馈</NavLink>
-                            </Menu.Item>
-                            <Menu.Item icon={<IdcardOutlined />}>
-                                <NavLink to="/about">关于我们</NavLink>
-                            </Menu.Item>
-                        </Menu>
-                    </Row>
+                <Sider
+                    collapsible
+                    trigger={null}
+                    collapsedWidth={60}
+                    collapsed={collapsed}
+                >
+                    <MainLogo />
+                    <MainMenu />
                 </Sider>
                 <Layout>
                     <Content>
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/feedback" component={Feedback} />
+                        <Route path="/feedback" component={Feedback} />
                         <Route path="/about" component={About} />
                     </Content>
                 </Layout>
@@ -60,5 +49,6 @@ const App = () => {
         </Router>
     );
 };
+const MainLayout = connect(mapStateToProps)(MainLayoutCom);
 
-export default App;
+export default MainLayout;

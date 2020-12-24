@@ -12,4 +12,11 @@ const counter = (state = { count: 0 }, action) => {
     }
 };
 
-export default combineReducers({ counter });
+const mainMenuCollapsed = (state = { collapsed: false }, action) => {
+    const { collapsed } = state;
+    return {
+        collapsed: !collapsed,
+    };
+};
+
+export default combineReducers({ counter, mainMenuCollapsed });
