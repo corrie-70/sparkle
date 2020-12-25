@@ -6,22 +6,18 @@
         height: 48px;
         line-height: 2;
         color: #fff;
+        flex-wrap: nowrap;
 
         .logo-row-title {
             padding-left: 24px;
-            width: calc(100% - 60px);
+            flex: 1;
         }
         .logo-row-btn {
-            // margin-left: 60px;
-            // flex: 0 0 auto;
             width: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .row-btn-collapse {
-            // margin: 0 auto;
-        }
-    }
-    .logo-row-collapsed {
-        // margin-right: 12px;
     }
     .sider-menu-row {
         height: calc(100% - 48px);
@@ -38,10 +34,6 @@
 
 .hidden {
     display: none !important;
-}
-
-.show-animation {
-    animation: display 1s ease-in forwards;
 }
 
 .fade-in {
