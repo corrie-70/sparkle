@@ -1,4 +1,5 @@
 const { override, fixBabelImports, addLessLoader } = require('customize-cra');
+const fs = require('fs');
 const path = require('path');
 
 module.exports = {
@@ -15,6 +16,7 @@ module.exports = {
         }),
         (config) => {
             config.target = 'electron-renderer';
+            fs.writeFileSync(`${__dirname}/config.json`, JSON.stringify(config))
             return config;
         }
     ),

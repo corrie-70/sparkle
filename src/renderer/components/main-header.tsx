@@ -1,0 +1,72 @@
+import Icon, { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { Button, Col, Layout, Row } from "antd";
+import React from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import * as actions from "../stores/actions";
+
+import { ReactComponent as CloseSvg } from "../../assets/images/close.svg";
+import { ReactComponent as MaximizeSvg } from "../../assets/images/maximize.svg";
+import { ReactComponent as MinimizeSvg } from "../../assets/images/minimize.svg";
+import { ReactComponent as NormalSizeSvg } from "../../assets/images/normal-size.svg";
+
+const { Header } = Layout;
+
+interface IStateProps {
+    collapsed: boolean;
+}
+
+interface IDispatcherProps {
+    changeCollapsedAction: () => void;
+}
+
+// 将 reducer 中的状态插入到组件的 props 中
+const mapStateToProps = (state): IStateProps => {
+    return {
+        collapsed: state.mainMenuCollapsed.collapsed,
+    };
+};
+
+// 将 对应action 插入到组件的 props 中
+const mapDispatcherToProps = (dispatch: Dispatch): IDispatcherProps => ({
+    changeCollapsedAction: () => dispatch(actions.changeCollapsedAction()),
+});
+
+type ReduxType = ReturnType<typeof mapStateToProps> &
+    ReturnType<typeof mapDispatcherToProps>;
+
+const MainHeaderCom = (props: ReduxType) => {
+    const { collapsed, changeCollapsedAction } = props;
+    return (
+        <Header className="main-header">
+            <Row>
+                <Col>
+                    <Button
+                        type="primary"
+                        onClick={changeCollapsedAction}
+                        icon={
+                            collapsed ? (
+                                <MenuUnfoldOutlined />
+                            ) : (
+                                <MenuFoldOutlined />
+                            )
+                        }
+                    ></Button>
+                </Col>
+                <Col>
+                    <Icon component={MinimizeSvg}></Icon>
+                    <Icon component={NormalSizeSvg}></Icon>
+                    <Icon component={MaximizeSvg}></Icon>
+                    <Icon component={CloseSvg}></Icon>
+                </Col>
+            </Row>
+        </Header>
+    );
+};
+
+const MainHeader = connect(
+    mapStateToProps,
+    mapDispatcherToProps
+)(MainHeaderCom);
+
+export { MainHeader };

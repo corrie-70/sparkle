@@ -10,8 +10,9 @@ import { Feedback } from "./feedback";
 import { MainLogo } from "../components/main-logo";
 import { MainMenu } from "../components/main-menu";
 import { connect } from "react-redux";
+import { MainHeader } from "../components/main-header";
 
-const { Sider, Header, Content } = Layout;
+const { Sider, Content } = Layout;
 
 interface IStateProps {
     collapsed: boolean;
@@ -39,6 +40,7 @@ const MainLayoutCom = (props: IStateProps) => {
                     <MainMenu />
                 </Sider>
                 <Layout>
+                    <MainHeader></MainHeader>
                     <Content>
                         <Route exact path="/" component={Home} />
                         <Route path="/feedback" component={Feedback} />

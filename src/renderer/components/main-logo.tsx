@@ -1,16 +1,12 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import Icon, { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Col, Row } from "antd";
 import React from "react";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import * as actions from "../stores/actions";
+
+import { ReactComponent as SparklerSvg } from "../../assets/images/sparkler.svg";
 
 interface IStateProps {
     collapsed: boolean;
-}
-
-interface IDispatcherProps {
-    changeCollapsedAction: () => void;
 }
 
 // 将 reducer 中的状态插入到组件的 props 中
@@ -20,19 +16,11 @@ const mapStateToProps = (state): IStateProps => {
     };
 };
 
-// 将 对应action 插入到组件的 props 中
-const mapDispatcherToProps = (dispatch: Dispatch): IDispatcherProps => ({
-    changeCollapsedAction: () => dispatch(actions.changeCollapsedAction()),
-});
-
-type ReduxType = ReturnType<typeof mapStateToProps> &
-    ReturnType<typeof mapDispatcherToProps>;
-
-const MainLogoCom = (props: ReduxType) => {
-    const { collapsed, changeCollapsedAction } = props;
+const MainLogoCom = (props: IStateProps) => {
+    const { collapsed } = props;
     return (
         <Row className="sider-logo-row">
-            <Col
+            {/* <Col
                 className={
                     collapsed
                         ? "logo-row-title fadeout hidden"
@@ -40,8 +28,8 @@ const MainLogoCom = (props: ReduxType) => {
                 }
             >
                 Sparkle
-            </Col>
-            <Col className="logo-row-btn">
+            </Col> */}
+            {/* <Col className="logo-row-btn">
                 <Button
                     type="primary"
                     onClick={changeCollapsedAction}
@@ -53,10 +41,14 @@ const MainLogoCom = (props: ReduxType) => {
                         )
                     }
                 ></Button>
+            </Col> */}
+            <Col>
+                <Icon component={SparklerSvg}></Icon>
             </Col>
+            {!collapsed && <Col className="logo-row-title">Sparkle</Col>}
         </Row>
     );
 };
-const MainLogo = connect(mapStateToProps, mapDispatcherToProps)(MainLogoCom);
+const MainLogo = connect(mapStateToProps)(MainLogoCom);
 
 export { MainLogo };
