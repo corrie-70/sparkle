@@ -43,25 +43,29 @@
         background-color: rgb(245, 245, 245);
         color: rgb(163, 163, 163);
         line-height: 0;
+        -webkit-app-region: drag;
 
         .main-header-collapse {
             line-height: 64px;
+            button {
+                -webkit-app-region: no-drag;
+            }
         }
 
         .main-header-resize {
             font-size: 9px;
+            -webkit-app-region: no-drag;
             span {
-                padding:8px 12px;
+                padding: 8px 12px;
                 cursor: pointer;
 
                 &:hover {
-                    
                     color: rgb(88, 88, 88);
                     background-color: rgb(229, 229, 229);
                 }
             }
-            .header-resize-close{
-                &:hover{
+            .header-resize-close {
+                &:hover {
                     color: #ffffff;
                     background-color: rgb(250, 81, 81);
                 }
