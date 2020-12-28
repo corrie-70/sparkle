@@ -42,7 +42,7 @@ const MainLayoutCom = (props: IStateProps) => {
                 </Sider>
                 <Layout>
                     <MainHeader></MainHeader>
-                    <Content>
+                    <Content className="main-content">
                         <Route exact path="/" component={Home} />
                         <Route path="/feedback" component={Feedback} />
                         <Route path="/about" component={About} />

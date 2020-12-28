@@ -39,8 +39,8 @@ const MainHeaderCom = (props: ReduxType) => {
     const { collapsed, changeCollapsedAction } = props;
     return (
         <Header className="main-header">
-            <Row>
-                <Col>
+            <Row justify="space-between">
+                <Col className="main-header-collapse">
                     <Button
                         type="primary"
                         onClick={changeCollapsedAction}
@@ -53,11 +53,11 @@ const MainHeaderCom = (props: ReduxType) => {
                         }
                     ></Button>
                 </Col>
-                <Col>
-                    <Icon component={MinimizeSvg}></Icon>
-                    <Icon component={NormalSizeSvg}></Icon>
-                    <Icon component={MaximizeSvg}></Icon>
-                    <Icon component={CloseSvg}></Icon>
+                <Col className="main-header-resize">
+                    <Icon component={MinimizeSvg} title="最小化"></Icon>
+                    <Icon component={NormalSizeSvg} title="向下还原"></Icon>
+                    <Icon component={MaximizeSvg} title="最大化"></Icon>
+                    <Icon className="header-resize-close" component={CloseSvg} title="关闭"></Icon>
                 </Col>
             </Row>
         </Header>
