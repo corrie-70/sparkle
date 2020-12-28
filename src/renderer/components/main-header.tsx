@@ -1,6 +1,6 @@
 import Icon, { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Col, Layout, Row } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import * as actions from "../stores/actions";
@@ -35,8 +35,9 @@ const mapDispatcherToProps = (dispatch: Dispatch): IDispatcherProps => ({
 type ReduxType = ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatcherToProps>;
 
-const MainHeaderCom = (props: ReduxType) => {
+const MainHeaderCom: React.FC<ReduxType> = (props: ReduxType) => {
     const { collapsed, changeCollapsedAction } = props;
+    const [isMax, setIsMax] = useState(false);
     return (
         <Header className="main-header">
             <Row justify="space-between">
@@ -55,9 +56,16 @@ const MainHeaderCom = (props: ReduxType) => {
                 </Col>
                 <Col className="main-header-resize">
                     <Icon component={MinimizeSvg} title="最小化"></Icon>
-                    <Icon component={NormalSizeSvg} title="向下还原"></Icon>
-                    <Icon component={MaximizeSvg} title="最大化"></Icon>
-                    <Icon className="header-resize-close" component={CloseSvg} title="关闭"></Icon>
+                    {isMax ? (
+                        <Icon component={MaximizeSvg} title="向下还原"></Icon>
+                    ) : (
+                        <Icon component={NormalSizeSvg} title="最大化"></Icon>
+                    )}
+                    <Icon
+                        className="header-resize-close"
+                        component={CloseSvg}
+                        title="关闭"
+                    ></Icon>
                 </Col>
             </Row>
         </Header>
