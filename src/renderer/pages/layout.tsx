@@ -35,6 +35,7 @@ const MainLayoutCom = (props: IStateProps) => {
                     trigger={null}
                     collapsedWidth={60}
                     collapsed={collapsed}
+                    className="main-sider"
                 >
                     <MainLogo />
                     <MainMenu />

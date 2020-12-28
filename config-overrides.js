@@ -1,4 +1,5 @@
 const { override, fixBabelImports, addLessLoader } = require('customize-cra');
+const { getThemeVariables } = require('antd/dist/theme');
 const fs = require('fs');
 const path = require('path');
 
@@ -11,12 +12,16 @@ module.exports = {
         }),
         addLessLoader({
             lessOptions: {
+                // modifyVars: getThemeVariables({
+                //     dark: true, // 开启暗黑模式
+                //     compact: true, // 开启紧凑模式
+                // }),
                 javascriptEnabled: true
             }
         }),
         (config) => {
             config.target = 'electron-renderer';
-            fs.writeFileSync(`${__dirname}/config.json`, JSON.stringify(config))
+            // fs.writeFileSync(`${__dirname}/config.json`, JSON.stringify(config))
             return config;
         }
     ),

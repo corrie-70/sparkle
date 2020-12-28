@@ -42,7 +42,7 @@ const MainLogoCom = (props: IStateProps) => {
                     }
                 ></Button>
             </Col> */}
-            <Col>
+            <Col className="logo-row-image">
                 <Icon component={SparklerSvg}></Icon>
             </Col>
             {!collapsed && <Col className="logo-row-title">Sparkle</Col>}
