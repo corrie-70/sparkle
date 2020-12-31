@@ -9,6 +9,8 @@ import { ReactComponent as CloseSvg } from "../../assets/images/close.svg";
 import { ReactComponent as MaximizeSvg } from "../../assets/images/maximize.svg";
 import { ReactComponent as MinimizeSvg } from "../../assets/images/minimize.svg";
 import { ReactComponent as NormalSizeSvg } from "../../assets/images/normal-size.svg";
+import { IPCChannel } from "src/utils/ipc/ipc-channels";
+import { IPCRendererSendToMain } from "../ipc/ipc-renderer";
 
 const { Header } = Layout;
 
@@ -38,6 +40,21 @@ type ReduxType = ReturnType<typeof mapStateToProps> &
 const MainHeaderCom: React.FC<ReduxType> = (props: ReduxType) => {
     const { collapsed, changeCollapsedAction } = props;
     const [isMax, setIsMax] = useState(false);
+
+    const minimizeClick = () => {
+        IPCRendererSendToMain(IPCChannel.window.minimize);
+    };
+
+    const maximizeClick = () => {
+        setIsMax(true);
+        IPCRendererSendToMain(IPCChannel.window.maximize);
+    };
+
+    const normalsizeClick = () => {
+        setIsMax(false);
+        IPCRendererSendToMain(IPCChannel.window.normalsize);
+    };
+
     return (
         <Header className="main-header">
             <Row justify="space-between">
@@ -55,11 +72,23 @@ const MainHeaderCom: React.FC<ReduxType> = (props: ReduxType) => {
                     ></Button>
                 </Col>
                 <Col className="main-header-resize">
-                    <Icon component={MinimizeSvg} title="最小化"></Icon>
+                    <Icon
+                        component={MinimizeSvg}
+                        title="最小化"
+                        onClick={minimizeClick}
+                    ></Icon>
                     {isMax ? (
-                        <Icon component={MaximizeSvg} title="向下还原"></Icon>
+                        <Icon
+                            component={MaximizeSvg}
+                            title="向下还原"
+                            onClick={maximizeClick}
+                        ></Icon>
                     ) : (
-                        <Icon component={NormalSizeSvg} title="最大化"></Icon>
+                        <Icon
+                            component={NormalSizeSvg}
+                            title="最大化"
+                            onClick={normalsizeClick}
+                        ></Icon>
                     )}
                     <Icon
                         className="header-resize-close"
