@@ -4,11 +4,15 @@ import App from "./pages/layout";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./stores";
+import { ConfigProvider } from "antd";
+import zhCN from 'antd/lib/locale/zh_CN';
 
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>
-            <App />
+            <ConfigProvider locale={zhCN}>
+                <App />
+            </ConfigProvider>
         </React.StrictMode>
     </Provider>,
     document.getElementById("root")

@@ -1,5 +1,5 @@
 import Icon, { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Button, Col, Layout, Row } from "antd";
+import { Button, Col, Layout, Modal, Row } from "antd";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -13,6 +13,7 @@ import { IPCChannel } from "src/utils/ipc/ipc-channels";
 import { IPCRendererSendToMain } from "../ipc/ipc-renderer";
 
 const { Header } = Layout;
+const { confirm } = Modal;
 
 interface IStateProps {
     collapsed: boolean;
@@ -46,13 +47,23 @@ const MainHeaderCom: React.FC<ReduxType> = (props: ReduxType) => {
     };
 
     const maximizeClick = () => {
+        setIsMax(false);
+        IPCRendererSendToMain(IPCChannel.window.normalsize);
+    };
+
+    const normalsizeClick = () => {
         setIsMax(true);
         IPCRendererSendToMain(IPCChannel.window.maximize);
     };
 
-    const normalsizeClick = () => {
-        setIsMax(false);
-        IPCRendererSendToMain(IPCChannel.window.normalsize);
+    const closeClick = () => {
+        confirm({
+            title: "确认要关闭吗？",
+            onOk() {
+                window.close();
+            },
+            centered: true,
+        });
     };
 
     return (
@@ -94,6 +105,7 @@ const MainHeaderCom: React.FC<ReduxType> = (props: ReduxType) => {
                         className="header-resize-close"
                         component={CloseSvg}
                         title="关闭"
+                        onClick={closeClick}
                     ></Icon>
                 </Col>
             </Row>

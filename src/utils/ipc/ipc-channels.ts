@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export const IPCChannel = {
     window: {
         minimize: "minimize",
