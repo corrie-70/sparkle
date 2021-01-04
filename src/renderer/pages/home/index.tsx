@@ -1,9 +1,13 @@
-import { Button, Layout, message, Row, Space, Table } from "antd";
+import { Button, Input, Layout, message, Row, Space, Table } from "antd";
 import { ColumnsType } from "antd/lib/table/interface";
 import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import * as actions from "../../stores/actions";
+import { EditableCell } from "./components/editable-cell";
+import { EditableRow } from "./components/editable-row";
+
+import "./index.less";
 
 const { Sider, Header, Content } = Layout;
 
@@ -30,11 +34,30 @@ const mapDispatcherToProps = (dispatch: Dispatch): IDispatcherProps => ({
 type ReduxType = ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatcherToProps>;
 
-const columns: ColumnsType = [
+const TableDataSource = [
+    {
+        key: "1",
+        content: "胡彦斌",
+        date: 32,
+        repeat: "西湖区湖底公园1号",
+    },
+    {
+        key: "2",
+        content: "胡彦祖",
+        date: 42,
+        repeat: "西湖区湖底公园1号",
+    },
+];
+
+type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
+
+const TableColumns = [
     {
         title: "内容",
         dataIndex: "content",
         key: "content",
+        ellipsis: true,
+        editable: true,
     },
     {
         title: "日期",
@@ -51,29 +74,47 @@ const columns: ColumnsType = [
         key: "action",
         render: (text, record) => (
             <Space size="middle">
+                <a>Edit</a>
                 <a>Delete</a>
             </Space>
         ),
     },
 ];
 
-const dataSource = [
-    {
-        key: "1",
-        content: "胡彦斌",
-        date: 32,
-        repeat: "西湖区湖底公园1号",
-    },
-    {
-        key: "2",
-        content: "胡彦祖",
-        date: 42,
-        repeat: "西湖区湖底公园1号",
-    },
-];
+type EditableTableProps = Parameters<typeof Table>[0];
+
+interface DataType {
+    key: React.Key;
+    name: string;
+    age: string;
+    address: string;
+}
 
 const HomeCom = (props: ReduxType) => {
-    const { count, increaseAction } = props;
+    // const { count, increaseAction } = props;
+    const components = {
+        body: {
+            row: EditableRow,
+            cell: EditableCell,
+        },
+    };
+    const columns = TableColumns.map((col) => {
+        if (!col.editable) {
+            return col;
+        }
+        return {
+            ...col,
+            onCell: (record: DataType) => ({
+                record,
+                editable: col.editable,
+                dataIndex: col.dataIndex,
+                title: col.title,
+                handleSave: () => {
+                    console.log("handleSave");
+                },
+            }),
+        };
+    });
     return (
         // <div>
         //     Home
@@ -87,9 +128,15 @@ const HomeCom = (props: ReduxType) => {
         //         Increase
         //     </Button>
         // </div>
-        <Layout>
+        <Layout className="layout-home">
             <Content>
-                <Table columns={columns} dataSource={dataSource}></Table>
+                <Table
+                    components={components}
+                    rowClassName={() => "editable-row"}
+                    bordered
+                    columns={columns as ColumnTypes}
+                    dataSource={TableDataSource}
+                ></Table>
             </Content>
         </Layout>
     );
