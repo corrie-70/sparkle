@@ -1,5 +1,5 @@
-import Icon, { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Button, Col, Row } from "antd";
+import Icon from "@ant-design/icons";
+import { Col, Row } from "antd";
 import React from "react";
 import { connect } from "react-redux";
 
@@ -20,28 +20,6 @@ const MainLogoCom = (props: IStateProps) => {
     const { collapsed } = props;
     return (
         <Row className="sider-logo-row">
-            {/* <Col
-                className={
-                    collapsed
-                        ? "logo-row-title fadeout hidden"
-                        : "logo-row-title fadein show-block"
-                }
-            >
-                Sparkle
-            </Col> */}
-            {/* <Col className="logo-row-btn">
-                <Button
-                    type="primary"
-                    onClick={changeCollapsedAction}
-                    icon={
-                        collapsed ? (
-                            <MenuUnfoldOutlined />
-                        ) : (
-                            <MenuFoldOutlined />
-                        )
-                    }
-                ></Button>
-            </Col> */}
             <Col className="logo-row-image">
                 <Icon component={SparklerSvg}></Icon>
             </Col>

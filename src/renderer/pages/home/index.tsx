@@ -109,8 +109,8 @@ const HomeCom = (props: ReduxType) => {
                 editable: col.editable,
                 dataIndex: col.dataIndex,
                 title: col.title,
-                handleSave: () => {
-                    console.log("handleSave");
+                handleSave: (record) => {
+                    console.log("handleSave",record);
                 },
             }),
         };
