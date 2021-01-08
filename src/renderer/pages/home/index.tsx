@@ -6,6 +6,7 @@ import { Dispatch } from "redux";
 import * as actions from "../../stores/actions";
 import { EditableCell } from "./components/editable-cell";
 import { EditableRow } from "./components/editable-row";
+import db, { addReminder } from "../../../utils/storage/indexeddb-storage";
 
 import "./index.less";
 
@@ -33,6 +34,11 @@ const mapDispatcherToProps = (dispatch: Dispatch): IDispatcherProps => ({
 
 type ReduxType = ReturnType<typeof mapStateToProps> &
     ReturnType<typeof mapDispatcherToProps>;
+
+// db.version(1).stores({ reminder: "id,content,date,repeat" });
+// db.reminder.put({ content: "test", repeat: false });
+
+// addReminder({ content: "test", repeat: false })
 
 const TableDataSource = [
     {
@@ -110,7 +116,7 @@ const HomeCom = (props: ReduxType) => {
                 dataIndex: col.dataIndex,
                 title: col.title,
                 handleSave: (record) => {
-                    console.log("handleSave",record);
+                    console.log("handleSave", record);
                 },
             }),
         };
