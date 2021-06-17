@@ -6,7 +6,6 @@ import { Dispatch } from "redux";
 import * as actions from "../../stores/actions";
 import { EditableCell } from "./components/editable-cell";
 import { EditableRow } from "./components/editable-row";
-import db, { addReminder } from "../../../utils/storage/indexeddb-storage";
 
 import "./index.less";
 
@@ -97,30 +96,6 @@ interface DataType {
 }
 
 const HomeCom = (props: ReduxType) => {
-    // const { count, increaseAction } = props;
-    const components = {
-        body: {
-            row: EditableRow,
-            cell: EditableCell,
-        },
-    };
-    const columns = TableColumns.map((col) => {
-        if (!col.editable) {
-            return col;
-        }
-        return {
-            ...col,
-            onCell: (record: DataType) => ({
-                record,
-                editable: col.editable,
-                dataIndex: col.dataIndex,
-                title: col.title,
-                handleSave: (record) => {
-                    console.log("handleSave", record);
-                },
-            }),
-        };
-    });
     return (
         // <div>
         //     Home
@@ -137,10 +112,9 @@ const HomeCom = (props: ReduxType) => {
         <Layout className="layout-home">
             <Content>
                 <Table
-                    components={components}
                     rowClassName={() => "editable-row"}
                     bordered
-                    columns={columns as ColumnTypes}
+                    columns={TableColumns}
                     dataSource={TableDataSource}
                 ></Table>
             </Content>
