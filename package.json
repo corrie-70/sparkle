@@ -16,6 +16,7 @@
     "babel-plugin-import": "^1.13.3",
     "customize-cra": "^1.0.0",
     "electron-store": "^8.0.0",
+    "electron-updater": "^4.3.9",
     "less": "^3.13.0",
     "less-loader": "^7.1.0",
     "react": "^17.0.1",
@@ -79,6 +80,12 @@
     ],
     "extraMetadata": {
       "main": "build/main.js"
-    }
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": ""
+      }
+    ]
   }
 }
